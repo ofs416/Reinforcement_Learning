@@ -7,13 +7,15 @@ import numpy as np
 import gymnasium as gym
 
 
-class MonteCarloAgent:
+class TemporalQLearning:
     def __init__(self, env, lambda_discount=1.0):
         self.env = env
         self.lambda_discount = lambda_discount
+        self.epsilon_init = 0.95
+        self.epsilon_final = 0.1
 
         # Initialize value function to zeros - no prior knowledge
-        self.value_func = np.zeros(env.unwrapped.desc.shape)
+        self.q_table = np.zeros(env.unwrapped.desc.shape, env.unwrapped.actions.shape)
         
         # Initialize returns for each state
         self.returns = {(i, j): [] for i in range(self.value_func.shape[0]) 
@@ -23,27 +25,8 @@ class MonteCarloAgent:
     
     def update(self, episode):
         states, actions, rewards = zip(*episode)
+        #TODO: update to use q table
         
-        # Calculate R_k as per notes
-        R = 0  
-        returns = []
-        for r in reversed(rewards):  
-            R = r + self.lambda_discount * R
-            returns.insert(0, R)
-            
-        # Update value function for all states
-        for t in range(len(states)):
-            state = states[t]
-            R = returns[t]
-            self.N[state] += 1
-            
-            # Equation (2) from the notes
-            self.value_func[state[0]][state[1]] = (
-                (self.N[state] - 1) / self.N[state] * self.value_func[state[0]][state[1]] + 
-                1/self.N[state] * R
-            )
-            
-            self.returns[state].append(R)
     
     def train(self, episodes=1000):
         for episode in range(episodes):
@@ -85,11 +68,8 @@ if __name__ == "__main__":
     env = CustomFrozenLake(base_env, hole_reward=-10.0, step_reward=-1, goal_reward=100.0)
     
     # Create and train agent
-    agent = MonteCarloAgent(env)
+    agent = TemporalQLearning(env)
     agent.train(episodes=10_000)
-    
-    print("\nFinal Value Function:")
-    print(agent.value_func)
     
     # Print the environment layout for reference
     print("\nEnvironment Layout:")
