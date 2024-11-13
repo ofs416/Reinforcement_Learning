@@ -16,12 +16,6 @@ class TemporalQLearning:
 
         # Initialize value function to zeros - no prior knowledge
         self.q_table = np.zeros(env.unwrapped.desc.shape, env.unwrapped.actions.shape)
-        
-        # Initialize returns for each state
-        self.returns = {(i, j): [] for i in range(self.value_func.shape[0]) 
-                                 for j in range(self.value_func.shape[1])}
-        self.N = {(i, j): 0 for i in range(self.value_func.shape[0]) 
-                           for j in range(self.value_func.shape[1])}
     
     def update(self, episode):
         states, actions, rewards = zip(*episode)
@@ -47,20 +41,12 @@ class TemporalQLearning:
                 # Get coordinates of next state
                 next_row = next_state // self.env.unwrapped.ncol
                 next_col = next_state % self.env.unwrapped.ncol
-                
-                # Add current state, action, reward to episode data
-                episode_data.append(((state_row, state_col), action, reward))
-                
-                # If terminal state reached, add it with its reward
-                if done:
-                    episode_data.append(((next_row, next_col), None, reward))
-                
+
+                # Update to next state
                 state = next_state
                 state_row = next_row
                 state_col = next_col
             
-            self.update(episode_data)
-
 
 if __name__ == "__main__":
     # Create base environment and wrap it
