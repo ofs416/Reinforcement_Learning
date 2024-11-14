@@ -3,10 +3,6 @@ import gymnasium as gym
 
 from custom_frozen_lake import CustomFrozenLake
 
-import numpy as np
-import gymnasium as gym
-
-
 class TemporalQLearning:
     def __init__(self, env, lambda_discount=1.0):
         self.env = env
@@ -16,6 +12,12 @@ class TemporalQLearning:
 
         # Initialize value function to zeros - no prior knowledge
         self.q_table = np.zeros(env.unwrapped.desc.shape, env.unwrapped.actions.shape)
+
+    def policy(self, state, epsilon):
+        # Epsilon-greedy action selection
+        if np.random.random() < epsilon:
+            return np.random.randint(self.env.action_space.n)
+        return np.argmax(self.q_table[state])
     
     def update(self, episode):
         states, actions, rewards = zip(*episode)
@@ -29,7 +31,6 @@ class TemporalQLearning:
             state_col = state % self.env.unwrapped.ncol
             
             done = False
-            episode_data = []
             episode_reward = 0
             
             while not done:
@@ -38,15 +39,7 @@ class TemporalQLearning:
                 done = terminated or truncated
                 episode_reward += reward
                 
-                # Get coordinates of next state
-                next_row = next_state // self.env.unwrapped.ncol
-                next_col = next_state % self.env.unwrapped.ncol
 
-                # Update to next state
-                state = next_state
-                state_row = next_row
-                state_col = next_col
-            
 
 if __name__ == "__main__":
     # Create base environment and wrap it
