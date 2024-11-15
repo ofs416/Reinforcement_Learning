@@ -1,6 +1,5 @@
 import gymnasium as gym
 from gymnasium.envs.toy_text.frozen_lake import generate_random_map
-import time
 
 env = gym.make('FrozenLake-v1',
                 desc=generate_random_map(size=8),
