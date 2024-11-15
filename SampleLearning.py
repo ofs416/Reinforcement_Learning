@@ -46,12 +46,8 @@ if __name__ == "__main__":
     env = CustomFrozenLake(
         base_env, hole_reward=-10.0, step_reward=-1, goal_reward=100.0
     )
-    test_env2 = CustomFrozenLake(
-        base_env, hole_reward=-10.0, step_reward=-1, goal_reward=100.0
-    )
-    test_env_lint = CustomFrozenLake(
-        base_env, hole_reward=-10.0, step_reward=-1, goal_reward=100.0
-    )
+    test_env2 = CustomFrozenLake(base_env, hole_reward=-10.0, step_reward=-1, goal_reward=100.0)
+    test_env_lint = CustomFrozenLake(base_env, hole_reward=-10.0, step_reward=-1, goal_reward=100.0     )
 
     # Create and train agent
     agent = TemporalQLearning(env)
