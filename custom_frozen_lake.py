@@ -1,10 +1,11 @@
 import gymnasium as gym
 
 
-# Create a custom environment by inheriting from FrozenLake-v1
+# Create a custom environment by inheriting from FrozenLake-v1 and modifying rewards.
 class CustomFrozenLake(gym.Wrapper):
-    def __init__(self, env, hole_reward=-1.0, step_reward=-0.1, goal_reward=1.0):
-        super().__init__(env)
+    def __init__(self, hole_reward=-1.0, step_reward=-0.1, goal_reward=1.0, **kwargs):
+        base_env = gym.make("FrozenLake-v1", **kwargs)
+        super().__init__(base_env)
         self.hole_reward = hole_reward
         self.step_reward = step_reward
         self.goal_reward = goal_reward
@@ -29,21 +30,13 @@ class CustomFrozenLake(gym.Wrapper):
 
 
 if __name__ == "__main__":
-    # Create the base environment
-    base_env = gym.make(
-        "FrozenLake-v1",
-        desc=None,
-        map_name="8x8",
-        is_slippery=True,
-        render_mode="human",
-    )
-
     # Wrap it with custom rewards
     env = CustomFrozenLake(
-        base_env,
         hole_reward=-10.0,  # Penalty for falling in a hole
         step_reward=-0.01,  # Small penalty for each step to encourage faster completion
         goal_reward=10.0,  # Reward for reaching the goal
+        map_name="4x4",
+        render_mode="human",  # Render the environment
     )
 
     # Max steps based on environment size - using unwrapped env
