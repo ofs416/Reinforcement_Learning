@@ -43,8 +43,10 @@ class TemporalQLearning:
 if __name__ == "__main__":
     # Create base environment and wrap it
     base_env = gym.make("FrozenLake-v1", map_name="4x4", is_slippery=True)
-    env = CustomFrozenLake(base_env, hole_reward=-10.0, step_reward=-1, goal_reward=100.0
+    env = CustomFrozenLake(
+        base_env, hole_reward=-10.0, step_reward=-1, goal_reward=100.0
     )
+    test_env = CustomFrozenLake(base_env, hole_reward=-10.0, step_reward=-1, goal_reward=100.0)
 
     # Create and train agent
     agent = TemporalQLearning(env)
