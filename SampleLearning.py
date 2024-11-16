@@ -8,6 +8,7 @@ class TemporalQLearning:
     def __init__(self, env, lambda_discount=1.0):
         self.env = env
         self.lambda_discount = lambda_discount
+        self.aplha_lr = 1.0
         self.epsilon_init = 0.95
         self.epsilon_final = 0.1
 
@@ -20,21 +21,21 @@ class TemporalQLearning:
             return np.random.randint(self.env.action_space.n)
         return np.argmax(self.q_table[state])
 
-    def update(self, episode):
-        states, actions, rewards = zip(*episode)
-        # TODO: update to use q table
+    def update(self, step_data):
+        _ = *step_data
+        self.q_table[state, action] = (1 - self.aplha_lr) * self.q_table[state, action] 
+                + self.alpha_lr * (reward + self.lambda_discount * np.max(self.q_table[next_state]))
+
 
     def train(self, episodes=1000):
         for episode in range(episodes):
             state, _ = self.env.reset()
-            state_row = state // self.env.unwrapped.ncol
-            state_col = state % self.env.unwrapped.ncol
 
             done = False
             episode_reward = 0
 
             while not done:
-                action = np.random.randint(4)
+                action = self.policy(state, self.epsilon_init)
                 next_state, reward, terminated, truncated, _ = self.env.step(action)
                 done = terminated or truncated
                 episode_reward += reward
