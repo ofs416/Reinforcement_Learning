@@ -17,6 +17,7 @@ This repository contains code and resources for reinforcement learning projects.
 curl -LsSf https://astral.sh/uv/install.sh | sh  # Linux/Mac
 # or
 powershell -c "irm https://astral.sh/uv/install.ps1 | iex"  # Windows
+```
 
 2. Set up Python environment (requires Python 3.12+):
 ```sh
