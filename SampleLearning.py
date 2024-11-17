@@ -1,5 +1,4 @@
 import numpy as np
-import gymnasium as gym
 
 from custom_frozen_lake import CustomFrozenLake
 
