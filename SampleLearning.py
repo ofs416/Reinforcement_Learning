@@ -22,7 +22,7 @@ class TemporalQLearning:
         return np.argmax(self.q_table[state])
 
     def update(self, step_data):
-        _ = *step_data
+        state, action, next_state, reward = *step_data
         self.q_table[state, action] = (1 - self.aplha_lr) * self.q_table[state, action] 
                 + self.alpha_lr * (reward + self.lambda_discount * np.max(self.q_table[next_state]))
 
@@ -37,8 +37,10 @@ class TemporalQLearning:
             while not done:
                 action = self.policy(state, self.epsilon_init)
                 next_state, reward, terminated, truncated, _ = self.env.step(action)
+                self.update((state, action, next_state, reward))
                 done = terminated or truncated
                 episode_reward += reward
+                state = next_state
 
 
 if __name__ == "__main__":
