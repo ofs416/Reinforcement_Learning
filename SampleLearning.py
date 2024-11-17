@@ -24,7 +24,7 @@ class TemporalQLearning:
     def update(self, step_data):
         state, action, next_state, reward = *step_data
         self.q_table[state, action] = (1 - self.aplha_lr) * self.q_table[state, action] 
-                + self.alpha_lr * (reward + self.lambda_discount * np.max(self.q_table[next_state]))
+        + self.alpha_lr * (reward + self.lambda_discount * np.max(self.q_table[next_state]))
 
 
     def train(self, episodes=1000):
