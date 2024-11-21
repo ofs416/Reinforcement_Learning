@@ -4,10 +4,14 @@ This repository contains code and resources for reinforcement learning projects.
 
 ## Project Structure
 
-- [`custom_frozen_lake.py`](custom_frozen_lake.py) - Custom wrapper for FrozenLake environment with configurable rewards
-- [`SampleLearning.py`](SampleLearning.py) - Implementation of Temporal Q-Learning algorithm
-- [`Discrete.py`](Discrete.py) - Example of using the basic FrozenLake environment
 - [`optimal_control.ipynb`](optimal_control.ipynb) - Jupyter notebook exploring optimal control theory
+- [`predictive_control.ipynb`](predictive_control.ipynb) - Jupyter notebook exploring predictive control theory
+- [`reinforcement_learning.ipynb`](reinforcement_learning.ipynb) - Jupyter notebook exploring predictive control theory
+- [`Discrete.py`](Discrete.py) - Familariser for the basic FrozenLake environment
+- [`custom_frozen_lake.py`](custom_frozen_lake.py) - Custom wrapper for FrozenLake environment with configurable rewards
+- [`SampleLearning.py`](SampleLearning.py) - Implementation of Temporal Q-Learning algorithm as described in [`reinforcement_learning.ipynb`](reinforcement_learning.ipynb)
+
+
 
 
 ## Getting Started
