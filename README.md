@@ -42,7 +42,7 @@ python Discrete.py
 Run the temporal Q-learning example:
 
 ```sh
-python SampleLearning.py
+python QLearning.py
 ```
 
 ## Development
