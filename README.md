@@ -4,13 +4,13 @@ This repository contains code and resources for reinforcement learning projects.
 
 ## Project Structure
 
-- [`optimal_control.ipynb`](optimal_control.ipynb) - Jupyter notebook exploring optimal control theory
-- [`predictive_control.ipynb`](predictive_control.ipynb) - Jupyter notebook exploring predictive control theory
-- [`MDP.ipynb`](MDP.ipynb) - Jupyter notebook exploring markov decision processes
-- [`deep_rl.ipynb`](deep_rl.ipynb) - Exploration of neural nets for function approximation
+- [`1_optimal_control.ipynb`](1_optimal_control.ipynb) - Jupyter notebook exploring optimal control theory
+- [`2_predictive_control.ipynb`](2_predictive_control.ipynb) - Jupyter notebook exploring predictive control theory
+- [`3_MDP.ipynb`](3_MDP.ipynb) - Jupyter notebook exploring markov decision processes
+- [`4_deep_rl.ipynb`](4_deep_rl.ipynb) - Exploration of neural nets for function approximation
 - [`Discrete.py`](Discrete.py) - Familiariser for the basic FrozenLake environment
 - [`custom_frozen_lake.py`](custom_frozen_lake.py) - Custom wrapper for FrozenLake environment with configurable rewards
-- [`SampleLearning.py`](SampleLearning.py) - Implementation of Temporal Q-Learning algorithm as described in [`deep_rl.ipynb`](deep_rl.ipynb)
+- [`QLearning.py`](QLearning.py) - Implementation of Temporal Q-Learning algorithm as described in [`3_MDP.ipynb`](3_MDP.ipynb)
 
 
 
