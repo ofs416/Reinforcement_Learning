@@ -3,7 +3,7 @@ import numpy as np
 from custom_frozen_lake import CustomFrozenLake
 
 
-class TemporalQLearning:
+class QLearning:
     def __init__(self, env):
         self.env = env
         self.lambda_discount = 1.0
@@ -29,7 +29,6 @@ class TemporalQLearning:
 
     def update(self, step_data):
         state, action, next_state, reward = step_data
-        # Q(s,a) = (1-α)Q(s,a) + α[R + γ*max(Q(s',a'))]
         self.q_table[state, action] = (1 - self.alpha_lr) * self.q_table[
             state, action
         ] + self.alpha_lr * (
@@ -99,7 +98,7 @@ if __name__ == "__main__":
     )
 
     # Create and train agent
-    agent = TemporalQLearning(env)
+    agent = QLearning(env)
     agent.train(episodes=32)
 
     # Print the environment layout for reference
